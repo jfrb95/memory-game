@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { toTitleCase } from './utils';
 import './styles/App.css'
 
 function App() {
@@ -7,19 +8,25 @@ function App() {
 
   const [nameList, setNameList] = useState([]);
   const [imgList, setImgList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const pokedexNumbers = [1, 6, 8, 11, 15, 17, 19, 25, 28, 34, 39, 41];
   
   
   {
-  const request = new Request(rootUrl + 1);
+  const number = 31
+  const request = new Request(rootUrl + number);
 
   useEffect(() => {
     (async function fetchPokemon() {
       await fetch(request)
-        .then((response) => response.json())
-        .then((response) => console.log(response.name));
-    })()
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Failed to fetch Pokemon #${number}`);
+          }
+          return response.json()
+        })
+    })();
   })
   }
 
