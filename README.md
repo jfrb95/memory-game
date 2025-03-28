@@ -1,0 +1,1 @@
+A pokemon-themed memory game made using react. This app demonstrates use of useEffect, among other basic react techniques.
