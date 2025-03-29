@@ -17,12 +17,16 @@ function App() {
     (async function fetchPokemon() {
       const pokePromises = pokedexNumbers.map(number => {
         const request = new Request(rootUrl + number);
-        fetch(request)
+        return fetch(request)
           .then((response) => {
             if (!response.ok) {
               throw new Error(`Failed to fetch Pokemon #${number}`);
             }
-            return response.json()
+            return response.json();;
+          })
+          .catch(error => {
+            console.error(`Failed to fetch Pokemon #${number}`, error);
+            return null;
           });
       })
 
@@ -33,7 +37,6 @@ function App() {
       }, [])
       setPokemonList(pokemon);
     })();
-    console.log(pokemonList);
   }, []);
   
   function logPokemonList() {
