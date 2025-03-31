@@ -36,6 +36,7 @@ function App() {
         return acc;
       }, []);
       setPokemonList(pokemon);
+      setLoading(false);
 
     })();
 
@@ -43,6 +44,23 @@ function App() {
   
   function logPokemonList() {
     console.log(pokemonList);
+  }
+
+  const [scores, setScores] = useState({current: 0, high: 0});
+
+  function increaseScore() {
+    setScores(prevState => {
+      const increment = prevState.current + 1;
+      return {
+        current: increment,
+        high: increment > prevState.high ? increment : prevState.high
+      }
+    }
+    );
+  }
+
+  function resetScore() {
+    setScores(prevState => ({...prevState, current: 0}))
   }
 
   function cardClick() {
@@ -56,8 +74,13 @@ function App() {
   return (
     <>
       <header>
-        <h1>Pokemon Memory Game</h1>
-        <p>Click the images to gain points, but don't click the same one twice!</p>
+        <div className="title">
+          <h1>Pokemon Memory Game</h1>
+          <p>Click the images to gain points, but don't click the same one twice!</p>
+        </div>
+        <div className="scores">
+
+        </div>
       </header>
       <main>
         <button onClick={logPokemonList} className='hidden'>Log Pokemon List</button>
@@ -67,6 +90,7 @@ function App() {
             <Card
               key={`${pokemon.name} card`}
               character={pokemon}
+              onClickFunc={cardClick}
             />
           )
         })}
