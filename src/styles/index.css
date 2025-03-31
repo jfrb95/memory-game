@@ -1,3 +1,18 @@
+body {
+  display: flex;
+  justify-content: center;
+  
+  background-color: lightgrey;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+
+  background-color: white;
+}
+
 * {
   padding: 0;
   margin: 0;
