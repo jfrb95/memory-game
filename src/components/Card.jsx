@@ -1,8 +1,11 @@
 import { toTitleCase } from "../utils"
 
-export default function Card({ character }) {
+export default function Card({ character, onClickFunc }) {
   return (
-    <button className='card'>
+    <button 
+      className='card'
+      onClick={onClickFunc}
+    >
       <img
         className={'character-image'}
         src={character.sprites.other['official-artwork']['front_default']}

@@ -45,6 +45,14 @@ function App() {
     console.log(pokemonList);
   }
 
+  function cardClick() {
+    //if first time card is clicked:
+    //  add score
+    //else:
+    //  reset score
+    //shuffle pokemonList
+  }
+
   return (
     <>
       <header>
