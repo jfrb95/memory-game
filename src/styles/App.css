@@ -1,0 +1,11 @@
+button {
+  background-color: green;
+  border: 1px solid black;
+}
+
+button.card {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
