@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
-import { toTitleCase } from './utils';
 import Card from './components/Card';
+import ScoreTracker from './components/ScoreTracker';
+import useScoreHandler from './hooks/useScoreHandler';
+import useCardHandler from './hooks/useCardHandler';
 import './styles/App.css'
 
 function App() {
@@ -12,6 +14,8 @@ function App() {
 
   const pokedexNumbers = [1, 6, 8, 11, 15, 17, 19, 25, 28, 34, 39, 41];
 
+  //better to encapsulate all API-spefici logic in here, so that the rest
+  //  of the program can be used without being changed
   useEffect(() => {
 
     (async function fetchPokemon() {
@@ -46,30 +50,8 @@ function App() {
     console.log(pokemonList);
   }
 
-  const [scores, setScores] = useState({current: 0, high: 0});
-
-  function increaseScore() {
-    setScores(prevState => {
-      const increment = prevState.current + 1;
-      return {
-        current: increment,
-        high: increment > prevState.high ? increment : prevState.high
-      }
-    }
-    );
-  }
-
-  function resetScore() {
-    setScores(prevState => ({...prevState, current: 0}))
-  }
-
-  function cardClick() {
-    //if first time card is clicked:
-    //  add score
-    //else:
-    //  reset score
-    //shuffle pokemonList
-  }
+  const _scoreHandler = useScoreHandler();
+  const _cardHandler = useCardHandler();
 
   return (
     <>
@@ -78,22 +60,26 @@ function App() {
           <h1>Pokemon Memory Game</h1>
           <p>Click the images to gain points, but don't click the same one twice!</p>
         </div>
-        <div className="scores">
-
-        </div>
+        <ScoreTracker 
+          scoreHandler={_scoreHandler}
+        />
       </header>
       <main>
-        <button onClick={logPokemonList} className='hidden'>Log Pokemon List</button>
+        <button onClick={logPokemonList} /*className='hidden'*/>Log Pokemon List</button>
         
-        {pokemonList.map(pokemon => {
-          return (
-            <Card
-              key={`${pokemon.name} card`}
-              character={pokemon}
-              onClickFunc={cardClick}
-            />
-          )
-        })}
+        <div id="cards-wrapper">
+          {pokemonList.map(pokemon => {
+            return (
+              <Card
+                key={`${pokemon.name} card`}
+                character={pokemon}
+                cardHandler={_cardHandler}
+                scoreHandler={_scoreHandler}
+              />
+            )
+          })}
+
+        </div>
       </main>
     </>
   )

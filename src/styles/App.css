@@ -1,4 +1,4 @@
-main {
+#cards-wrapper {
   align-self: center;
   display: flex;
   flex-wrap: wrap;
@@ -9,11 +9,6 @@ main {
   margin-bottom: 2em;
   margin-left: 3em;
   margin-right: 3em;
-}
-
-button {
-  background-color: green;
-  border: 1px solid black;
 }
 
 button.card {
