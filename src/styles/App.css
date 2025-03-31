@@ -4,8 +4,8 @@ button {
 }
 
 button.card {
-  all: unset;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background: transparent;
+  border: 0;
+  text-align: inherit;
+  font: inherit;
 }

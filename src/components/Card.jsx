@@ -1,3 +1,5 @@
+import { toTitleCase } from "../utils"
+
 export default function Card({ character }) {
   return (
     <button className='card'>
@@ -7,7 +9,7 @@ export default function Card({ character }) {
         alt={`${character.name} front view`}
       />
       <p className='card-name'>
-        {character.name}
+        {toTitleCase(character.name)}
       </p>
     </button>
   )

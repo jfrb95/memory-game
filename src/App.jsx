@@ -34,7 +34,7 @@ function App() {
       const pokemon = pokeResults.reduce((acc, curr) => {
         acc.push(curr);
         return acc;
-      }, [])
+      }, []);
       setPokemonList(pokemon);
 
     })();
@@ -43,7 +43,6 @@ function App() {
   
   function logPokemonList() {
     console.log(pokemonList);
-    console.log(pokemonList[0].sprites.other['official-artwork']['front_default'])
   }
 
   return (
