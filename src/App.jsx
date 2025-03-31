@@ -20,7 +20,7 @@ function App() {
   //    by the app
   let pokedexNumbers = [1, 6, 8, 11, 15, 17, 19, 25, 28, 34, 39, 41];
 
-  //better to encapsulate all API-spefici logic in here, so that the rest
+  //better to encapsulate all API-specific logic in here, so that the rest
   //  of the program can be used without being changed. 
   //DO this and separate it all out into separate module. Only thing here 
   //  should be the return section and any other necessary bits such as

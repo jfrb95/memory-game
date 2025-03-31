@@ -3,9 +3,6 @@ import { useState } from "react";
 
 export default function Card({ character, cardHandler, scoreHandler, funcs=[] }) {
 
-  //spent needs to reset when resetScore is triggered in ANY card, currently
-  //  this is not the case
-
   function _onClickFunc() {
     if (cardHandler.spentCards.has(character.id)) {
       scoreHandler.resetScore();
