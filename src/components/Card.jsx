@@ -1,7 +1,7 @@
 import { toTitleCase } from "../utils"
 import { useState } from "react";
 
-export default function Card({ character, cardHandler, scoreHandler }) {
+export default function Card({ character, cardHandler, scoreHandler, funcs=[] }) {
 
   //spent needs to reset when resetScore is triggered in ANY card, currently
   //  this is not the case
@@ -14,6 +14,7 @@ export default function Card({ character, cardHandler, scoreHandler }) {
       scoreHandler.incrementScore();
       cardHandler.spendCard(character.id);
     }
+    funcs.forEach(func => func());
   }
 
   return (

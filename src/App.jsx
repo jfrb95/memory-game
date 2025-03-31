@@ -4,6 +4,7 @@ import ScoreTracker from './components/ScoreTracker';
 import useScoreHandler from './hooks/useScoreHandler';
 import useCardHandler from './hooks/useCardHandler';
 import './styles/App.css'
+import { shuffle } from './utils';
 
 function App() {
   
@@ -12,10 +13,18 @@ function App() {
   const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const pokedexNumbers = [1, 6, 8, 11, 15, 17, 19, 25, 28, 34, 39, 41];
+  //when this gets shuffled, the cards don't re-order.
+  //  POSSIBLE SOLUTION: use a state for this.
+  //  ADDITIONAL: integrate this solution into the pokemon list state,
+  //    while reducing the pokemonList to contain only information used
+  //    by the app
+  let pokedexNumbers = [1, 6, 8, 11, 15, 17, 19, 25, 28, 34, 39, 41];
 
   //better to encapsulate all API-spefici logic in here, so that the rest
-  //  of the program can be used without being changed
+  //  of the program can be used without being changed. 
+  //DO this and separate it all out into separate module. Only thing here 
+  //  should be the return section and any other necessary bits such as
+  //  hook initialization
   useEffect(() => {
 
     (async function fetchPokemon() {
@@ -53,6 +62,10 @@ function App() {
   const _scoreHandler = useScoreHandler();
   const _cardHandler = useCardHandler();
 
+  function logPokedexNumbers() {
+    console.log(pokedexNumbers);
+  }
+
   return (
     <>
       <header>
@@ -75,6 +88,7 @@ function App() {
                 character={pokemon}
                 cardHandler={_cardHandler}
                 scoreHandler={_scoreHandler}
+                funcs={[() => pokedexNumbers = shuffle(pokedexNumbers), logPokedexNumbers]}
               />
             )
           })}
