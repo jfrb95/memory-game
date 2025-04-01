@@ -21,12 +21,12 @@ export default function Card({ character, cardHandler, scoreHandler, funcs=[] })
     >
       <img
         className={'character-image'}
-        src={character.sprites.other['official-artwork']['front_default']}
+        src={character.img}
         alt={`${character.name} front view`}
       />
       <p className='card-name'>
         {toTitleCase(character.name)}
       </p>
     </button>
-  )
+  );
 }

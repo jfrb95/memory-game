@@ -13,12 +13,7 @@ function App() {
   const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  //when this gets shuffled, the cards don't re-order.
-  //  POSSIBLE SOLUTION: use a state for this.
-  //  ADDITIONAL: integrate this solution into the pokemon list state,
-  //    while reducing the pokemonList to contain only information used
-  //    by the app
-  let pokedexNumbers = [1, 6, 8, 11, 15, 17, 19, 25, 28, 34, 39, 41];
+  const pokedexNumbers = [1, 6, 8, 11, 15, 17, 19, 25, 28, 34, 39, 41];
 
   //better to encapsulate all API-specific logic in here, so that the rest
   //  of the program can be used without being changed. 
@@ -45,26 +40,22 @@ function App() {
 
       const pokeResults = await Promise.all(pokePromises);
       const pokemon = pokeResults.reduce((acc, curr) => {
-        acc.push(curr);
+        acc.push({
+          name: curr.name,
+          img: curr.sprites.other['official-artwork']['front_default'],
+          id: curr.id
+          }
+        );
         return acc;
       }, []);
       setPokemonList(pokemon);
       setLoading(false);
-
     })();
 
   }, []);
-  
-  function logPokemonList() {
-    console.log(pokemonList);
-  }
 
   const _scoreHandler = useScoreHandler();
   const _cardHandler = useCardHandler();
-
-  function logPokedexNumbers() {
-    console.log(pokedexNumbers);
-  }
 
   return (
     <>
@@ -88,7 +79,7 @@ function App() {
                 character={pokemon}
                 cardHandler={_cardHandler}
                 scoreHandler={_scoreHandler}
-                funcs={[() => pokedexNumbers = shuffle(pokedexNumbers), logPokedexNumbers]}
+                funcs={[() => setPokemonList(prevState => shuffle(prevState))]}
               />
             )
           })}
